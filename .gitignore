@@ -1,0 +1,3 @@
+*.exe
+.dart_tools/
+.packages
