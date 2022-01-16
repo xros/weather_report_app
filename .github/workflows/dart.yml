@@ -41,16 +41,14 @@ jobs:
       - name: Run tests
         run: dart test test/test.dart
 
-      - name: Set Compile Location
-        run: mkdir build -p && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build
+      - name: Set GITHUB_ENV for Compile Location
+        run: mkdir build_tmp -p && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build_tmp && echo "build_path=$BUILD_DIR" >> $GITHUB_ENV 
 
-      - name: Echo env 
-        run: echo $BUILD_DIR
         
       # dart compile
       # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
       - name: Run compile
-        run: dart compile exe bin/main.dart -o $BUILD_DIR/weather_report-$(uname)-$(uname -m).exe
+        run: dart compile exe bin/main.dart -o ${{ env.build_path }}/weather_report-$(uname)-$(uname -m).exe
         
       # Upload artifact
       - uses: actions/upload-artifact@v2
