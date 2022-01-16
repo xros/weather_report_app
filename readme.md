@@ -7,6 +7,8 @@ A Command Line Weather Report App Written in Dart Language
 
 [![Dart-Compile-MacOS-AMD64](https://github.com/xros/weather_report_app/actions/workflows/dart-macos-amd64.yml/badge.svg)](https://github.com/xros/weather_report_app/actions/workflows/dart-macos-amd64.yml)
 
+[![Dart-Compile-Windows-AMD64](https://github.com/xros/weather_report_app/actions/workflows/dart-windows-amd64.yml/badge.svg)](https://github.com/xros/weather_report_app/actions/workflows/dart-windows-amd64.yml)
+
 Usage
 -----
 For example, get Weather report of the city Berlin. In console, do `./weather_report.exe Berlin`
