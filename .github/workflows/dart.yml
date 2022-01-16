@@ -46,10 +46,22 @@ jobs:
       - name: Run compile
         run: dart compile exe bin/main.dart -o weather_report-$(uname)-$(uname -m).exe
       
+      # Create sample file world.txt
+      - name: Create file world.txt to /opt/world.txt
+        run: echo hello > /opt/world.txt
+        
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: /opt/world.txt
+
+      
       # Download artifact
       - uses: actions/download-artifact@v2
         with:
           name: my-artifact
           
       - name: Display structure of downloaded files
-        run: echo "Starting to download" && ls -R /home/runner/work/weather_report_app/weather_report_app/
+        run: ls -R /opt
+        #run: echo "Starting to download" && ls -R /home/runner/work/weather_report_app/weather_report_app/
