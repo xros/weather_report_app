@@ -1,0 +1,76 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Dart-Compile-MacOS-AMD64
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'bin/**'
+      - 'test/**'
+      - 'lib/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - '.github/workflows/dart-macos-amd64.yml'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-11
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: Install dependencies
+        run: dart pub get
+
+      # Uncomment this step to verify the use of 'dart format' on each commit.
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      - name: Analyze project source
+        run: dart analyze
+          
+      # Your project will need to have tests in test/ and a dependency on
+      # package:test for this step to succeed. Note that Flutter projects will
+      # want to change this to 'flutter test'.
+      - name: Run tests
+        run: dart test test/test.dart
+
+      - name: Set GITHUB_ENV for Compile Location
+        run: mkdir build_tmp -p && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build_tmp && echo "build_path=$BUILD_DIR" >> $GITHUB_ENV 
+
+        
+      # dart compile
+      # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
+      - name: Run compile
+        run: dart compile exe bin/main.dart -o ${{ env.build_path }}/weather_report-$(uname)-$(uname -m).exe
+        
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: ${{ env.build_path }}
+      
+      - name: Make download dir
+        run: mkdir download_tmp -p && DOWNLOAD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/download_tmp && echo "download_path=$DOWNLOAD_DIR" >> $GITHUB_ENV 
+      
+      # Download artifact
+      - uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          path: ${{ env.download_path}}
+          
+      - name: Display structure of downloaded files
+        run: ls -R
