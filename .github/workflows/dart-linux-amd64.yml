@@ -14,7 +14,7 @@ on:
       - 'lib/**'
       - 'pubspec.yaml'
       - 'pubspec.lock'
-      - '.github/workflows/dart.yml'
+      - '.github/workflows/dart-linux-amd64.yml'
   pull_request:
     branches: [ main ]
 
