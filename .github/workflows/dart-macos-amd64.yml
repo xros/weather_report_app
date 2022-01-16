@@ -49,7 +49,7 @@ jobs:
         run: dart test test/test.dart
 
       - name: Set GITHUB_ENV for Compile Location
-        run: mkdir build_tmp -p && BUILD_DIR=${{ github.workspace }}/build_tmp && echo "build_path=$BUILD_DIR" >> $GITHUB_ENV 
+        run: mkdir build_tmp 2>&1 | BUILD_DIR=${{ github.workspace }}/build_tmp && echo "build_path=$BUILD_DIR" >> $GITHUB_ENV 
 
         
       # dart compile
@@ -64,7 +64,7 @@ jobs:
           path: ${{ env.build_path }}
       
       - name: Make download dir
-        run: mkdir download_tmp -p && DOWNLOAD_DIR=${{ github.workspace }}/download_tmp && echo "download_path=$DOWNLOAD_DIR" >> $GITHUB_ENV 
+        run: mkdir download_tmp 2>&1 | DOWNLOAD_DIR=${{ github.workspace }}/download_tmp && echo "download_path=$DOWNLOAD_DIR" >> $GITHUB_ENV 
       
       # Download artifact
       - uses: actions/download-artifact@v2
