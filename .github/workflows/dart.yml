@@ -47,7 +47,7 @@ jobs:
       # dart compile
       # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
       - name: Run compile
-        run: mkdir build && dart compile exe bin/main.dart -o $BUILD_DIR/weather_report-$(uname)-$(uname -m).exe
+        run: dart compile exe bin/main.dart -o $BUILD_DIR/weather_report-$(uname)-$(uname -m).exe
         
       # Upload artifact
       - uses: actions/upload-artifact@v2
