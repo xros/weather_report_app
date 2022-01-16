@@ -42,8 +42,11 @@ jobs:
         run: dart test test/test.dart
 
       - name: Set Compile Location
-        run: mkdir build && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build/
+        run: mkdir build -p && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build
 
+      - name: Echo env 
+        run: echo $BUILD_DIR
+        
       # dart compile
       # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
       - name: Run compile
