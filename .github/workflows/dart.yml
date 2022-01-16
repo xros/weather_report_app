@@ -54,7 +54,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: public
+          path: /home/runner/work/weather_report_app/weather_report_app/
 
       
       # Download artifact
