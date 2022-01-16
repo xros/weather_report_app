@@ -8,6 +8,16 @@ name: Dart
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '**.json'
+      - '**.txt'
+    paths:
+      - 'bin/**'
+      - 'test/**'
+      - 'lib/**'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
   pull_request:
     branches: [ main ]
 
