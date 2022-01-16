@@ -49,11 +49,11 @@ jobs:
         run: dart test test/test.dart
 
       - name: Set GITHUB_ENV for Compile Location
-        run: mkdir build_tmp -p && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build_tmp && echo "build_path=$BUILD_DIR" >> $GITHUB_ENV 
+        run: mkdir build_tmp -p && BUILD_DIR=${{ github.workspace }}/build_tmp && echo "build_path=$BUILD_DIR" >> $GITHUB_ENV 
 
         
       # dart compile
-      # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
+      # saved to: /User/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
       - name: Run compile
         run: dart compile exe bin/main.dart -o ${{ env.build_path }}/weather_report-$(uname)-$(uname -m).exe
         
@@ -64,7 +64,7 @@ jobs:
           path: ${{ env.build_path }}
       
       - name: Make download dir
-        run: mkdir download_tmp -p && DOWNLOAD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/download_tmp && echo "download_path=$DOWNLOAD_DIR" >> $GITHUB_ENV 
+        run: mkdir download_tmp -p && DOWNLOAD_DIR=${{ github.workspace }}/download_tmp && echo "download_path=$DOWNLOAD_DIR" >> $GITHUB_ENV 
       
       # Download artifact
       - uses: actions/download-artifact@v2
