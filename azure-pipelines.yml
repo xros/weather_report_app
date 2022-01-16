@@ -1,3 +1,6 @@
+name: Dart-Compile-Windows-ARM64
+
+
 on: [push]
 name: Azure ARM
 jobs:
