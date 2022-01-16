@@ -52,7 +52,7 @@ jobs:
           name: my-artifact
           
       - name: Display structure of downloaded files
-        run: ls -R
+        run: ls -R /home/runner/work/weather_report_app/weather_report_app/
 
       # Create Release
       - name: Create Release
