@@ -42,8 +42,17 @@ jobs:
         run: dart test test/test.dart
 
       # dart compile
+      # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
       - name: Run compile
         run: dart compile exe bin/main.dart -o weather_report-$(uname)-$(uname -m).exe
+      
+      # Download artifact
+      - uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          
+      - name: Display structure of downloaded files
+        run: ls -R
 
       # Create Release
       - name: Create Release
