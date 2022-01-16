@@ -41,21 +41,19 @@ jobs:
       - name: Run tests
         run: dart test test/test.dart
 
+      - name: Set Compile Location
+        run: mkdir build && BUILD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/build/
+
       # dart compile
       # saved to: /home/runner/work/weather_report_app/weather_report_app/weather_report-Linux-x86_64.exe
       - name: Run compile
-        run: dart compile exe bin/main.dart -o weather_report-$(uname)-$(uname -m).exe
-      
-      # Create sample file world.txt
-      - name: Create file world.txt to /opt/world.txt
-        run: echo hello > world.txt
+        run: mkdir build && dart compile exe bin/main.dart -o $BUILD_DIR/weather_report-$(uname)-$(uname -m).exe
         
       # Upload artifact
       - uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: /home/runner/work/weather_report_app/weather_report_app/
-
+          path: $BUILD_DIR
       
       # Download artifact
       - uses: actions/download-artifact@v2
