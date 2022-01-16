@@ -3,6 +3,8 @@ Weather Report App written in Dart
 
 A Command Line Weather Report App Written in Dart Language
 
+[![Dart Build](https://github.com/xros/weather_report_app/actions/workflows/dart.yml/badge.svg)](https://github.com/xros/weather_report_app/actions/workflows/dart.yml)
+
 Usage
 -----
 For example, get Weather report of the city Berlin. In console, do `./weather_report.exe Berlin`
