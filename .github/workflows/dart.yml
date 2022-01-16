@@ -54,12 +54,16 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: $BUILD_DIR
+          path: ${{ env.build_path }}
+      
+      - name: Make download dir
+        run: mkdir download_tmp -p && DOWNLOAD_DIR=/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/download_tmp && echo "download_path=$DOWNLOAD_DIR" >> $GITHUB_ENV 
       
       # Download artifact
       - uses: actions/download-artifact@v2
         with:
           name: my-artifact
+          path: ${{ env.download_path}}
           
       - name: Display structure of downloaded files
         run: ls -R
