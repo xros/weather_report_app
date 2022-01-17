@@ -27,3 +27,11 @@ Build Binary
 
 `dart compile exe bin/main.dart -o weather_report.exe`
 
+Show case
+----------
+Linux, MacOS, Windows
+
+<img width="975" alt="iShot2022-01-17 04 40 35" src="https://user-images.githubusercontent.com/2342412/149688520-22aaf83a-19cb-473c-a340-290f6134d2bc.png">
+
+<img width="957" alt="iShot2022-01-17 04 47 36" src="https://user-images.githubusercontent.com/2342412/149688536-3533a10b-4b1a-46b3-b310-ba1e31b6a394.png">
+
