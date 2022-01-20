@@ -44,7 +44,7 @@ jobs:
           command: mkdir build_tmp
       - run:
           name: Run tests
-          command: dart run test --reporter json > build_tmp/test_report.json
+          command: dart run test test/test.dart --reporter json > build_tmp/test_report.json
 
       - run: 
           name: Dart compile
