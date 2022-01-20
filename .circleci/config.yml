@@ -39,10 +39,13 @@ jobs:
       - run:
           name: Pub get install package
           command: dart pub get
+      - run: 
+          name: Make directory build_tmp
+          command: mkdir build_tmp
       - run:
           name: Run tests
-          command: dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
-      - run: mkdir build_tmp
+          command: dart run test --reporter json > build_tmp/test_report.json
+
       - run: 
           name: Dart compile
           command: dart compile exe bin/main.dart -o ./build_tmp/weather_report-$(uname)-$(uname -m).exe
