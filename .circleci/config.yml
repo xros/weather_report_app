@@ -34,15 +34,15 @@ jobs:
           pwd
 
           # Set PATH in profile for downstream commands
-          echo "export PATH=$PATH:/usr/lib/dart/bin" >> $BASH_ENV
+          echo "export PATH=$PATH:/home/circleci/project/dart-sdk/bin" >> $BASH_ENV
 
       - run:
           name: Run tests
-          command: /usr/lib/dart/bin/dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
+          command: /home/circleci/project/dart-sdk/bin/dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
       - run: mkdir build_tmp
       - run: 
           name: Dart compile
-          command: /usr/lib/dart/bin/dart compile exe bin/main.dart -o ./build_tmp/weather_report-$(uname)-$(uname -m).exe
+          command: dart compile exe bin/main.dart -o ./build_tmp/weather_report-$(uname)-$(uname -m).exe
       - store_artifacts:
           path: ./build_tmp/
 
