@@ -33,11 +33,11 @@ jobs:
 
       - run:
           name: Run tests
-          command: dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
+          command: /usr/lib/dart/bin/dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
       - run: mkdir build_tmp
       - run: 
           name: Dart compile
-          command: dart compile exe bin/main.dart -o ./build_tmp/weather_report-$(uname)-$(uname -m).exe
+          command: /usr/lib/dart/bin/dart compile exe bin/main.dart -o ./build_tmp/weather_report-$(uname)-$(uname -m).exe
       - store_artifacts:
           path: ./build_tmp/
 
