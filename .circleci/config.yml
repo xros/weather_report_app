@@ -37,8 +37,11 @@ jobs:
           echo "export PATH=$PATH:/home/circleci/project/dart-sdk/bin" >> $BASH_ENV
 
       - run:
+          name: Pub get install package
+          command: dart pub get
+      - run:
           name: Run tests
-          command: /home/circleci/project/dart-sdk/bin/dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
+          command: dart run test --reporter json | tojunit --output test-results/dart-tests/circleci_dart_demo_test-report.xml
       - run: mkdir build_tmp
       - run: 
           name: Dart compile
