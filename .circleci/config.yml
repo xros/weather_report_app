@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   build-medium:
     machine:
-      image: dart:stable-sdk
+      image: google/dart:latest
     resource_class: arm.medium
     steps:
       - run: uname -a
