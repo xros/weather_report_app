@@ -1,0 +1,78 @@
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - dependencies:
+          shell: "/bin/bash -eo pipefail"
+      - run:
+          name: Make folder for test results
+          command: mkdir -p test-results/dart-tests
+
+      - store_test_results:
+          path: test-results
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+      - run: 
+          name: Install Dart SDK
+          command: |
+            sudo apt-get update
+            sudo apt-get install apt-transport-https wget
+            
+            #sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+            #sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+            
+            # Update again and install
+            # sudo apt update
+            # sudo apt install dart --allow-unauthenticated -o "APT::Get::force-yes=false"
+
+            # install dart using wget
+            wget -c https://storage.googleapis.com/dart-archive/channels/stable/release/2.15.1/sdk/dartsdk-linux-arm64-release.zip
+            unzip dartsdk-linux-arm64-release.zip -d ./
+            pwd
+
+            # Set PATH in profile for downstream commands
+            echo "export PATH=$PATH:/home/circleci/project/dart-sdk/bin" >> $BASH_ENV
+
+      - run:
+          name: Pub get install package
+          command: dart pub get
+      - run: 
+          name: Make directory build_tmp
+          command: mkdir build_tmp
+      - run:
+          name: Run tests
+          command: dart run test test/test.dart --reporter json > build_tmp/test_report.json
+
+      - run: 
+          name: Dart compile
+          command: dart compile exe bin/main.dart -o ./build_tmp/weather_report-$(uname)-$(uname -m).exe
+      - store_artifacts:
+          path: ./build_tmp/
+
+commands:
+  dependencies:
+    description: "Download dependencies and setup global packages"
+    parameters:
+      shell:
+        type: string
+        default: "/bin/bash --login -eo pipefail"
+      pub-cache:
+        type: string
+        default: "~/.pub-cache"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1.4-dependencies-{{ arch }}-{{ checksum "pubspec.lock" }}
+            - v1.4-dependencies-{{ arch }}-
+
+
+workflows:
+  build:
+    jobs:
+      - build-medium
