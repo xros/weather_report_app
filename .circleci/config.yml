@@ -17,7 +17,7 @@ jobs:
           
           # Update again and install
           sudo apt update
-          sudo apt install dart -o "APT::Get::force-yes=true"
+          sudo apt install dart --allow-unauthenticated -o "APT::Get::force-yes=false"
 
 
           # Set PATH in profile for downstream commands
