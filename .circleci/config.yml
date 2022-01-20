@@ -17,7 +17,8 @@ jobs:
           
           # Update again and install
           sudo apt update
-          sudo apt install dart
+          sudo apt install dart  --force-yes
+
 
           # Set PATH in profile for downstream commands
           echo "export PATH=$PATH:/usr/lib/dart/bin" >> $BASH_ENV
