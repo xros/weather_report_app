@@ -4,12 +4,12 @@ import 'dart:io';
 import 'weather_api_client.dart';
 
 Future<void> main(List<String> args) async {
-  if (args.length != 1) {
+  if (args.length < 1) {
     print('Syntax: dart bin/main.dart <city>');
     // print('Syntax: ./weather_report.exe <city>');
     return;
   }
-  final city = args.first;
+  final city = args.reduce((value, element) => value + " " + element);
   final api = WeatherApiClient();
   try {
     // get locationId
