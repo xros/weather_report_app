@@ -79,7 +79,7 @@ jobs:
         run: mkdir download_tmp 2>&1
       
       # Download artifact
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: my-artifact
           path: ${{ github.workspace }}/download_tmp
