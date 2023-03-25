@@ -41,6 +41,9 @@ jobs:
       - run:
           name: Pub get install package
           command: dart pub get
+      - run:
+          name: Pub upgrade packages
+          command: dart pub upgrade
       - run: 
           name: Make directory build_tmp
           command: mkdir build_tmp
