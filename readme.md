@@ -37,3 +37,5 @@ Linux, MacOS, Windows
 
 <img width="957" alt="iShot2022-01-17 04 47 36" src="https://user-images.githubusercontent.com/2342412/149688536-3533a10b-4b1a-46b3-b310-ba1e31b6a394.png">
 
+## Diagram of this software
+![Diagram of weather report app](output-diagram.svg)
